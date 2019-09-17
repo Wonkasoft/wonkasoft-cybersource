@@ -1,3 +1,17 @@
-.form-table {
+table.form-table {
 	width: 80%;
+
+	tr {
+
+		th {
+			padding: 8px;
+			width: 150px;
+			vertical-align: middle;
+		}
+
+		td {
+			padding: 8px;
+			vertical-align: middle;
+		}
+	}
 }
