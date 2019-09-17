@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
@@ -12,6 +11,8 @@
  * @package    Wonkasoft_Cybersource
  * @subpackage Wonkasoft_Cybersource/includes
  */
+
+defined( 'ABSPATH' ) || exit;
 
 /**
  * The core plugin class.
@@ -117,6 +118,11 @@ class Wonkasoft_Cybersource {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wonkasoft-cybersource-admin.php';
 
 		/**
+		 * The file responsible for adding action links to the plugin screen.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/wonkasoft-cybersource-add-action-links.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -156,6 +162,10 @@ class Wonkasoft_Cybersource {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		if ( is_admin() ) {
+			$this->loader->add_action( 'admin_menu', $plugin_admin, 'wonkasoft_cybersource_admin_menu' );
+			$this->loader->add_action( 'admin_init', $plugin_admin, 'cybersource_register_settings' );
+		}
 
 	}
 
